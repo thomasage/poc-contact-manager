@@ -66,12 +66,14 @@
             "@auto-scripts"
         ],
         "cs-fix": "php-cs-fixer fix",
+        "deptrac": "docker run --init --tty --rm --user=$(id -u) --volume=\"$(pwd):/project\" --workdir \"/project\" jakzal/phpqa deptrac --report-uncovered",
         "phpstan": "phpstan analyse",
         "tests": "XDEBUG_MODE=coverage phpunit --coverage-html .phpunit.coverage --testdox",
         "qa": [
             "@cs-fix",
             "@phpstan",
-            "@tests"
+            "@tests",
+            "@deptrac"
         ]
     },
     "conflict": {

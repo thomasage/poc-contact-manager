@@ -67,7 +67,7 @@
         ],
         "cs-fix": "php-cs-fixer fix",
         "phpstan": "phpstan analyse",
-        "tests": "XDEBUG_MODE=coverage phpunit --coverage-html .phpunit.coverage",
+        "tests": "XDEBUG_MODE=coverage phpunit --coverage-html .phpunit.coverage --testdox",
         "qa": [
             "@cs-fix",
             "@phpstan",

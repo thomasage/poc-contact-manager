@@ -18,8 +18,14 @@ deptrac:
       collectors:
         - type: directory
           value: Shared/.*
+    - name: UserInterface
+      collectors:
+        - type: directory
+          value: ./UserInterface/.*
     - name: Vendor
       collectors:
+        - type: className
+          value: Doctrine\\.*
         - type: className
           value: Symfony\\.*
         - type: className
@@ -35,3 +41,7 @@ deptrac:
       - Domain
       - Vendor
     Shared: ~
+    UserInterface:
+      - Application
+      - Vendor
+    Vendor: ~

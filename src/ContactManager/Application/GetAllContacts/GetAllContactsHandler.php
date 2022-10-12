@@ -16,10 +16,11 @@ final class GetAllContactsHandler
     {
         $response = new GetAllContactsResponse();
         foreach ($this->contactGateway->getAllContacts() as $contact) {
-            $dto = new Contact();
-            $dto->id = (string) $contact->id();
-            $dto->name = (string) $contact->name();
-            $response->contacts[] = $dto;
+            $response->contacts[] = [
+                'id' => (string) $contact->id(),
+                'name' => (string) $contact->name(),
+                'registered_at' => (int) $contact->registeredAt()->format('U'),
+            ];
         }
         $presenter->present($response);
     }

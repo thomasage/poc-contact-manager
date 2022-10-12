@@ -6,6 +6,6 @@ namespace App\ContactManager\Application\GetAllContacts;
 
 final class GetAllContactsResponse
 {
-    /** @var Contact[] */
+    /** @var array<array{id: string, name: string, registered_at: int}> */
     public array $contacts = [];
 }

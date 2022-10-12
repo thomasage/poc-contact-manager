@@ -26,6 +26,18 @@ final class Contact
         return $contact;
     }
 
+    public static function fromState(ContactState $state): self
+    {
+        /** @var DateTimeImmutable $registeredAt */
+        $registeredAt = DateTimeImmutable::createFromFormat('U', (string) $state->registeredAt);
+        $contact = new self();
+        $contact->id = new ContactId($state->id);
+        $contact->name = new ContactName($state->name);
+        $contact->registeredAt = $registeredAt;
+
+        return $contact;
+    }
+
     public function id(): ContactId
     {
         return $this->id;
@@ -41,8 +53,13 @@ final class Contact
         $state = new ContactState();
         $state->id = (string) $this->id;
         $state->name = (string) $this->name;
-        $state->registeredAt = $this->registeredAt->format('c');
+        $state->registeredAt = (int) $this->registeredAt->format('U');
 
         return $state;
+    }
+
+    public function registeredAt(): DateTimeImmutable
+    {
+        return $this->registeredAt;
     }
 }

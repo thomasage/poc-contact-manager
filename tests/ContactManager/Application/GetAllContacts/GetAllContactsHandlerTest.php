@@ -27,10 +27,10 @@ final class GetAllContactsHandlerTest extends TestCase implements GetAllContacts
         $this->handler->handle($this);
 
         self::assertCount(2, $this->response->contacts);
-        self::assertSame('FM', $this->response->contacts[0]->id);
-        self::assertSame('Fox Mulder', $this->response->contacts[0]->name);
-        self::assertSame('DS', $this->response->contacts[1]->id);
-        self::assertSame('Dana Scully', $this->response->contacts[1]->name);
+        self::assertSame('FM', $this->response->contacts[0]['id']);
+        self::assertSame('Fox Mulder', $this->response->contacts[0]['name']);
+        self::assertSame('DS', $this->response->contacts[1]['id']);
+        self::assertSame('Dana Scully', $this->response->contacts[1]['name']);
     }
 
     public function present(GetAllContactsResponse $response): void

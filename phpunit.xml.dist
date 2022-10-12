@@ -20,6 +20,10 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <file>src/ContactManager/UserInterface/Homepage/HomepageController.php</file>
+            <file>src/ContactManager/Infrastructure/ContactGatewayDoctrine.php</file>
+        </exclude>
     </coverage>
     <listeners>
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>

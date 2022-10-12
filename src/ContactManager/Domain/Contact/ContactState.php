@@ -8,5 +8,5 @@ final class ContactState
 {
     public string $id;
     public string $name;
-    public string $registeredAt;
+    public int $registeredAt;
 }

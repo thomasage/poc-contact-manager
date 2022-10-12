@@ -7,22 +7,24 @@ namespace App\Tests\ContactManager\Doubles;
 use App\ContactManager\Domain\Contact\Contact;
 use App\ContactManager\Domain\Contact\ContactGateway;
 use App\ContactManager\Domain\Contact\ContactId;
+use App\ContactManager\Domain\Contact\ContactState;
 use App\ContactManager\Domain\Contact\Exception\ContactNotFound;
 use Generator;
+use RuntimeException;
 
 final class ContactGatewayInMemory implements ContactGateway
 {
-    /** @var Contact[] */
+    /** @var ContactState[] */
     private array $contacts = [];
 
     public function addContact(Contact $contact): void
     {
-        $this->contacts[] = $contact;
+        $this->contacts[] = $contact->getState();
     }
 
     public function deleteContact(Contact $contact): void
     {
-        throw new \RuntimeException('TODO');
+        throw new RuntimeException('TODO');
     }
 
     /**
@@ -30,7 +32,7 @@ final class ContactGatewayInMemory implements ContactGateway
      */
     public function getAllContacts(): Generator
     {
-        yield from $this->contacts;
+        yield from array_map(static fn (ContactState $state): Contact => Contact::fromState($state), $this->contacts);
     }
 
     /**
@@ -38,9 +40,9 @@ final class ContactGatewayInMemory implements ContactGateway
      */
     public function getContactById(ContactId $id): Contact
     {
-        foreach ($this->contacts as $contact) {
-            if ($contact->id()->equalsTo($id)) {
-                return $contact;
+        foreach ($this->contacts as $state) {
+            if ($id->equalsTo(new ContactId($state->id))) {
+                return Contact::fromState($state);
             }
         }
         throw new ContactNotFound();
@@ -48,6 +50,6 @@ final class ContactGatewayInMemory implements ContactGateway
 
     public function updateContact(Contact $contact): void
     {
-        throw new \RuntimeException('TODO');
+        throw new RuntimeException('TODO');
     }
 }

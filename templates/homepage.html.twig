@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Registered at</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for contact in vm.contacts %}
+            <tr>
+                <td>{{ contact.id }}</td>
+                <td>{{ contact.name }}</td>
+                <td>{{ contact.registered_at }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3" class="p-5 fst-italic text-center text-muted">No results</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

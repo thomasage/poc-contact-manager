@@ -8,6 +8,9 @@ use App\Shared\DomainException;
 
 final class ContactNotFound extends DomainException
 {
+    /**
+     * @codeCoverageIgnore
+     */
     public static function key(): string
     {
         return 'contact_not_found';

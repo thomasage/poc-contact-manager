@@ -8,6 +8,9 @@ use App\Shared\DomainException;
 
 final class ContactIdInvalid extends DomainException
 {
+    /**
+     * @codeCoverageIgnore
+     */
     public static function key(): string
     {
         return 'contact_id_invalid';

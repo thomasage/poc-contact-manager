@@ -7,6 +7,7 @@ namespace App\Tests\ContactManager\Doubles;
 use App\ContactManager\Domain\Contact\Contact;
 use App\ContactManager\Domain\Contact\ContactGateway;
 use App\ContactManager\Domain\Contact\ContactId;
+use App\ContactManager\Domain\Contact\ContactName;
 use App\ContactManager\Domain\Contact\ContactState;
 use App\ContactManager\Domain\Contact\Exception\ContactNotFound;
 use Generator;
@@ -42,6 +43,19 @@ final class ContactGatewayInMemory implements ContactGateway
     {
         foreach ($this->contacts as $state) {
             if ($id->equalsTo(new ContactId($state->id))) {
+                return Contact::fromState($state);
+            }
+        }
+        throw new ContactNotFound();
+    }
+
+    /**
+     * @throws ContactNotFound
+     */
+    public function getContactByName(ContactName $name): Contact
+    {
+        foreach ($this->contacts as $state) {
+            if ($name->equalsTo(new ContactName($state->name))) {
                 return Contact::fromState($state);
             }
         }

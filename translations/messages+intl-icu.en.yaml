@@ -1,0 +1,3 @@
+notification:
+    contact_added: 'Contact added.'
+    error_contact_already_exists: 'Contact already exists.'

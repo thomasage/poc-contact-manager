@@ -27,5 +27,10 @@ interface ContactGateway
     /**
      * @throws ContactNotFound
      */
+    public function getContactByName(ContactName $name): Contact;
+
+    /**
+     * @throws ContactNotFound
+     */
     public function updateContact(Contact $contact): void;
 }

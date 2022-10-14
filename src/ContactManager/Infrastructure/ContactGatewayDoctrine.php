@@ -7,7 +7,9 @@ namespace App\ContactManager\Infrastructure;
 use App\ContactManager\Domain\Contact\Contact;
 use App\ContactManager\Domain\Contact\ContactGateway;
 use App\ContactManager\Domain\Contact\ContactId;
+use App\ContactManager\Domain\Contact\ContactName;
 use App\ContactManager\Domain\Contact\ContactState;
+use App\ContactManager\Domain\Contact\Exception\ContactNotFound;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Result;
@@ -87,6 +89,22 @@ final class ContactGatewayDoctrine implements ContactGateway
     {
         // TODO: Implement getContactById() method.
         throw new RuntimeException('TODO');
+    }
+
+    /**
+     * @throws ContactNotFound
+     * @throws Exception
+     */
+    public function getContactByName(ContactName $name): Contact
+    {
+        $result = $this->connection->executeQuery('SELECT * FROM `'.self::TABLE_NAME.'` WHERE name = :name LIMIT 1', ['name' => (string) $name]);
+        $contact = $this->fetch($result);
+        $result->free();
+        if (!$contact) {
+            throw new ContactNotFound();
+        }
+
+        return $contact;
     }
 
     public function updateContact(Contact $contact): void

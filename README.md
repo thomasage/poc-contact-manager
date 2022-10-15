@@ -21,6 +21,7 @@ A proof-of-concept to implement Clean Architecture in PHP (with Symfony)
 * `composer cs-fix` PHP Coding Standards Fixer
 * `deptrac-cli` Enforces dependency rules between software layers (output results in console)
 * `deptrac-svg` Enforces dependency rules between software layers (output results in `deptrac.svg` file)
+* `infection` AST based PHP Mutation Testing Framework
 * `phpstan` Static Analysis Tool
 * `tests` Run tests suite
 * `qa` Run all previous tasks

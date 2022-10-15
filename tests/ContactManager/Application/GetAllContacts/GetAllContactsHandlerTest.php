@@ -29,8 +29,10 @@ final class GetAllContactsHandlerTest extends TestCase implements GetAllContacts
         self::assertCount(2, $this->response->contacts);
         self::assertSame('FM', $this->response->contacts[0]['id']);
         self::assertSame('Fox Mulder', $this->response->contacts[0]['name']);
+        self::assertIsInt($this->response->contacts[0]['registered_at']);
         self::assertSame('DS', $this->response->contacts[1]['id']);
         self::assertSame('Dana Scully', $this->response->contacts[1]['name']);
+        self::assertIsInt($this->response->contacts[1]['registered_at']);
     }
 
     public function present(GetAllContactsResponse $response): void

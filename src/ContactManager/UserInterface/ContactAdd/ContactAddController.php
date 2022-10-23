@@ -27,10 +27,10 @@ final class ContactAddController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var array{name: string} $data */
-            $data = $form->getData();
+            /** @var ContactAddFormData $formData */
+            $formData = $form->getData();
             $handlerRequest = new AddContactRequest();
-            $handlerRequest->name = $data['name'];
+            $handlerRequest->name = $formData->name;
             $this->handler->handle($handlerRequest, $this->presenter);
         }
 
